@@ -14,7 +14,7 @@ public class TestTask4 {
         int K = 2;
         List<List<Integer>> result = new ArrayList<>();
 
-        Assertions.assertTrue(Task4.canPartition(nums, K, result));
+        Assertions.assertTrue(Task4.isPartitionPossible(nums, K, result));
         Assertions.assertEquals(result.get(0), List.of(5, 1));
         Assertions.assertEquals(new HashSet<>(result.get(1)), Set.of(3, 4));
 
@@ -25,6 +25,6 @@ public class TestTask4 {
         int[] nums = {1, 2, 3, 4};
         int K = 3;
 
-        Assertions.assertFalse(Task4.canPartition(nums, K, new ArrayList<>()));
+        Assertions.assertFalse(Task4.isPartitionPossible(nums, K, new ArrayList<>()));
     }
 }

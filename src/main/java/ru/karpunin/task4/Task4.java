@@ -24,7 +24,7 @@ public class Task4 {
         System.out.println("Initial values: " + Arrays.toString(nums) + ", K= " + K);
         List<List<Integer>> result = new ArrayList<>();
 
-        if (canPartition(nums, K, result)) {
+        if (isPartitionPossible(nums, K, result)) {
             for (List<Integer> part : result) {
                 System.out.println(part + ", " + part.stream().mapToInt(Integer::intValue).sum());
             }
@@ -34,7 +34,7 @@ public class Task4 {
         System.out.println();
     }
 
-    public static boolean canPartition(int[] nums, int K, List<List<Integer>> result) {
+    public static boolean isPartitionPossible(int[] nums, int K, List<List<Integer>> result) {
         int totalSum = Arrays.stream(nums).sum();
 
         // Минимум мы положим в первую кучу 1, во вторую 2 и т.д, то есть получим арифметическую прогрессию длиной K
@@ -53,7 +53,7 @@ public class Task4 {
             partitions[i] = new ArrayList<>();
         }
 
-        if (canPartition(nums, 0, currentSums, targetSums, partitions)) {
+        if (doPartition(nums, 0, currentSums, targetSums, partitions)) {
             result.addAll(Arrays.asList(partitions));
             return true;
         }
@@ -61,7 +61,7 @@ public class Task4 {
         return false;
     }
 
-    private static boolean canPartition(int[] nums, int index, int[] currentSums, int[] targetSums, List<Integer>[] partitions) {
+    private static boolean doPartition(int[] nums, int index, int[] currentSums, int[] targetSums, List<Integer>[] partitions) {
 
         /*
             Условие выхода из рекурсии:
@@ -88,7 +88,7 @@ public class Task4 {
             if (currentSums[i] + nums[index] <= targetSums[i]) {
                 currentSums[i] += nums[index];
                 partitions[i].add(nums[index]);
-                if (canPartition(nums, index + 1, currentSums, targetSums, partitions)) {
+                if (doPartition(nums, index + 1, currentSums, targetSums, partitions)) {
                     return true;
                 }
                 currentSums[i] -= nums[index];
